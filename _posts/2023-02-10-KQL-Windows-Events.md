@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Parsing Windows Events with KQL
+tags: random kusto kql adx azure
 ---
 
 Below is an example of how to parse XML where each record has the same tag, but a different attribute value into individual columns in KQL. This is extremely helpful when manipulating Windows Event Data in an [Azure Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview) where each XML tag in the event is named "data" and has its actual value identified in the attribute.
