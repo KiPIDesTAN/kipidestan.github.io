@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Parsing Windows Events with KQL
-tags: roomba robot random
+tags: 
+- roomba 
+- robot
 ---
 
 ## Connect a terminal program
