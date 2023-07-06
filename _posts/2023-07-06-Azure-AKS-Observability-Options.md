@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Container Insights vs. Managed Prometheus
+title: Azure AKS Observability Options
 tags: 
 - Azure Monitor
 - Container Insights
