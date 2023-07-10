@@ -154,16 +154,22 @@ Container Insights is deployed via a Data Collection Rule. The DCR does not requ
 
 ## Deployment - Managed Prometheus
 
+_This section is a WIP_
+
 Managed Prometheus is deployed via a Data Collection Rule using the "Microsoft-PrometheusMetrics" stream, includes a lableIncludeFilter option on the stream, and only supports a destination type of "monitoringAccounts" (a.k.a. Azure Monitor Workspace).
 
 The DCR requires its own Data Collection Endpoint.
 
 The DCR association is done on the Kubernetes service. It is not done on the underlying compute. This is important to understand as AKS is backed by VMSS. The Azure Monitor Agent, which monitors a VM or VMSS, requires a DCR association between the DCR and the VM or VMSS. Users should not associate their DCR to the VMSS that supports the AKS service.
 
-Deploying an Azure Monitor Workspace automatically creates a new resource group of the format "MA_&lt;workspace-name>_location_managed." This creates a default DCE for metrics ingestion and a default DCR. __NOTE:__ You cannot create this resource group ahead of time. If the Azure Monitor Workspace sees a resource group of this type pre-created, it will create a new resource group of the same name with an "_X" appended to it, where X is an auto-incrementing number starting at 2.
+Deploying an Azure Monitor Workspace automatically creates a new resource group of the format "MA_&lt;workspace-name>_location_managed." This creates a default DCE for metrics ingestion and a default DCR.
+
+__NOTE:__ You cannot create the MA_ resource group ahead of time with a greenfield deployment. If the Azure Monitor Workspace sees a resource group of this type and it is not managed by the Azure Monitor Workspace in question, it will create a new resource group of the same name with an "_X" appended to it, where X is an auto-incrementing number starting at 2.
 
 Azure Monitor Workspace supports private networking both for data ingestion and querying. Data ingestion is done via an [AMPLS](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/private-link-data-ingestion) by associating the DCE to the AMPLS and enabling the DCE's network isolation.
 
 Private Endpoints for Azure Monitor Workspace have similar functionality to a Log Analytics Workspace's network isolation for querying. Only source systems on a VNET can query the Azure Monitor Workspace. Documentation [here](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/azure-monitor-workspace-private-endpoint).
 
 Deploying an Azure Monitor Workspace through the Portal automatically adds a lot of Prometheus Recording Rules. These rules are not deployed by default when deploying an Azure Monitor Workspace via IaC. 
+
+When deploying an Azure Monitor Workspace via the Portal, the deployment creates 
