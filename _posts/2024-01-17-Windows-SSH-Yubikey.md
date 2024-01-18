@@ -38,7 +38,7 @@ In this case, the capability that was present was named "OpenSSH.Client~~~~0.0.1
 Once installed, make sure the ssh-agent service isn't running. It will interfer with the gpg authentication. Run the command below in an elevated prompt.
 
 ```pwsh
- Get-Service ssh
+ Get-Service ssh*
 ```
 
 If it's running, open services.msc, stop the service, and disable it. In fact, if you accidentally installed sshd, which will show up with the same command above (I did that on purpose), and it's running, disable it also. 
